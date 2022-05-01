@@ -1,0 +1,42 @@
+syntax="proto3";
+
+
+message orderItem{
+    double price=1;
+    int32 product=2;
+    int32 quantity=3;
+}
+
+message order{
+    int32 id=1;
+    string username=2;
+    string first_name=3;
+    string last_name=4;
+    string email=5;
+    string address=6;
+    string zipcode=7;
+    string place=8;
+    string phone=9;
+    string stripe_token=10;
+    repeated orderItem items=11;
+    double paid_amount=12;
+}
+
+message checkoutRequest{
+    order data=1;
+}
+
+message checkoutResponse{
+    order data=1;
+}
+message getOrderListRequest{
+    string user=1;
+}
+message getOrderListResponse{
+   repeated order data=1;
+}
+
+service ordersfuncs{
+    rpc checkout(checkoutRequest) returns (checkoutResponse);
+    rpc getOrderList(getOrderListRequest) returns (getOrderListResponse);
+}

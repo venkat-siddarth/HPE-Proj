@@ -1,0 +1,131 @@
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 20, 2022 - 10:42:29
+Django version 4.0.4, using settings 'api2.settings'
+Starting development gRPC server at localhost:50052
+Quit the server with CTRL-BREAK.
+username: "ssss"
+first_name: "a"
+last_name: "aa"
+email: "a"
+address: "a"
+zipcode: "a"
+place: "a"
+phone: "a"
+stripe_token: "tok_1KqVqGSAkQbi2CogcqqhT6ML"
+items {
+  price: 120.0
+  product: 2
+  quantity: 6
+}
+items {
+  price: 600.0
+  product: 3
+  quantity: 5
+}
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 20, 2022 - 10:43:08
+Django version 4.0.4, using settings 'api2.settings'
+Starting development gRPC server at localhost:50052
+Quit the server with CTRL-BREAK.
+username: "ssss"
+first_name: "a"
+last_name: "aa"
+email: "a"
+address: "a"
+zipcode: "a"
+place: "a"
+phone: "a"
+stripe_token: "tok_1KqVqlSAkQbi2CogizuFJF9F"
+items {
+  price: 120.0
+  product: 2
+  quantity: 6
+}
+items {
+  price: 600.0
+  product: 3
+  quantity: 5
+}
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 20, 2022 - 10:43:47
+Django version 4.0.4, using settings 'api2.settings'
+Starting development gRPC server at localhost:50052
+Quit the server with CTRL-BREAK.
+username: "ssss"
+first_name: "a"
+last_name: "aa"
+email: "a"
+address: "a"
+zipcode: "a"
+place: "a"
+phone: "a"
+stripe_token: "tok_1KqVrjSAkQbi2CogXkXiBZVa"
+items {
+  price: 120.0
+  product: 2
+  quantity: 6
+}
+items {
+  price: 600.0
+  product: 3
+  quantity: 5
+}
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 20, 2022 - 10:45:31
+Django version 4.0.4, using settings 'api2.settings'
+Starting development gRPC server at localhost:50052
+Quit the server with CTRL-BREAK.
+username: "ssss"
+first_name: "a"
+last_name: "aa"
+email: "a"
+address: "a"
+zipcode: "a"
+place: "a"
+phone: "a"
+stripe_token: "tok_1KqVt4SAkQbi2Cog8knwqmBr"
+items {
+  price: 120.0
+  product: 2
+  quantity: 6
+}
+items {
+  price: 600.0
+  product: 3
+  quantity: 5
+}
+
+True
+username: "ssss"
+first_name: "a"
+last_name: "aa"
+email: "a"
+address: "a"
+zipcode: "a"
+place: "a"
+phone: "a"
+stripe_token: "tok_1KqVt4SAkQbi2Cog8knwqmBr"
+items {
+  price: 120.0
+  product: 2
+  quantity: 6
+}
+items {
+  price: 600.0
+  product: 3
+  quantity: 5
+}
+
+Request req_s7iYq8RYDAoOi8: You cannot accept payments using this API as it is no longer supported in India. Please refer to https://stripe.com/docs/payments for accepting payments.
+Hello World

@@ -1,0 +1,63 @@
+syntax="proto3";
+
+
+message product{
+    int32 id=1;
+    string name=2;
+    string get_absolute_url=3;
+    string description=4;
+    double price=5;
+    string get_image=6;
+    string get_thumbnail=7;
+}
+
+message category{
+    int32 id=1;
+    string name =2;
+    string get_absolute_url=3;
+    repeated product products=4;
+}
+
+message latestProductsRequest{
+    
+}
+message latestProductsResponse{
+    repeated product product = 1;
+}
+message productDetailsRequest{
+    string categoryslug= 1;
+    string productslug = 2;
+
+}
+message productDetailsResponse{
+    product product = 1;
+
+}
+message CategoryProductsRequest{
+    string categoryslug = 1;
+
+}
+message CategoryProductsResponse{
+    category category = 1;
+
+}
+message prodIDRequest{
+    int32 id=1;
+}
+message prodIDResponse{
+    product product =1;
+}
+
+message searchRequest{
+    string query=1;
+}
+message searchResponse{
+    repeated product product=1;
+}
+service productfuncs{
+    rpc getproductlist(latestProductsRequest) returns (latestProductsResponse);
+    rpc getproductdetails(productDetailsRequest) returns (productDetailsResponse);
+    rpc search(searchRequest) returns (searchResponse);
+    rpc id(prodIDRequest) returns (prodIDResponse);
+    rpc getcategorylist(CategoryProductsRequest) returns (CategoryProductsResponse);
+}

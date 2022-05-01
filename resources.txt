@@ -1,0 +1,8 @@
+[18:33] Selvarajan, Naveen Kumar
+https://prometheus.io/docs/instrumenting/exporters/
+Exporters and integrations | Prometheus
+An open-source monitoring system with a dimensional data model, flexible query language, efficient time series database and modern alerting approach.
+
+https://pypi.org/project/prometheus-flask-exporter/0.1.2/
+
+https://medium.com/@lchenn/monitor-python-grpc-applications-with-prometheus-with-py-grpc-prometheus-10f9100d2fca
