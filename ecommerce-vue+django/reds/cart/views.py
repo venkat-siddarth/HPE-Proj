@@ -39,25 +39,27 @@ def updatecart(request):
         obj1 = cart.objects.get(username=request.user.get_username())
         obj=mycartserializer(obj1)
         print(obj.data)
-        for i in obj.data["items"]:
-            data["items"].append(i)
+        # data["items"]=obj.data["items"]
+
         print("+++++++++",data["items"])
         print("++++++++++",obj1.delete())
+        serializer = cartserializer(data=data)
+    # print("---------------",obj)
+    # # serializer=cartserializer(instance=obj,data=obj)
+        if(serializer.is_valid()):
+            print('It is valid')
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         print("================\nError:=========",e)
+        return Response(status=status.HTTP_404_NOT_FOUND)
     
     
     # print(obj)
     # print("---------------", obj)
-    serializer = cartserializer(data=data)
-    # print("---------------",obj)
-    # # serializer=cartserializer(instance=obj,data=obj)
-    if(serializer.is_valid()):
-        print('It is valid')
-        serializer.save()
-        return Response(serializer.data)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    
 
 class cart_(APIView):
     authentication_classes = [authentication.TokenAuthentication]
