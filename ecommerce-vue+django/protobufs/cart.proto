@@ -1,0 +1,39 @@
+syntax="proto3";
+
+message product_{
+    int32 _id=1;
+    string name=2;
+    string get_absolute_url=3;
+    string description=4;
+    string price=5;
+    string get_image=6;
+    string get_thumbnail=7;
+    int32 quantity=8;
+}
+
+message cart{
+    string username=1;
+    repeated product_ items=2;
+}
+message createRequest{
+    cart req=1;
+}
+message createResponse{
+    cart req=1;
+}
+
+message updateResponse{
+    string response=1;
+}
+message getRequest{
+    string username=1;
+}
+message getResponse{
+    cart response=1;
+}
+service cartops{
+    rpc createcart(createRequest) returns (createResponse);
+    rpc updatecart(createRequest) returns (updateResponse);
+    rpc getCart(getRequest) returns (getResponse);
+}
+

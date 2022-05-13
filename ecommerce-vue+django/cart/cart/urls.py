@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from api.handlers import grpc_handlers as cart_grpc_handlers
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+def grpc_handlers(server):
+    cart_grpc_handlers(server)
