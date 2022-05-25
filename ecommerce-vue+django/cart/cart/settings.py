@@ -79,9 +79,12 @@ WSGI_APPLICATION = 'cart.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'ATOMIC_REQUEST': True,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cartDB',
+        'USER':'postgres',
+        'PASSWORD':'Siddu2002',
+        'HOST':'localhost',
+        'ATOMIC_REQUESTS':True
     }
 }
 
