@@ -17,3 +17,17 @@ TO RUN:
 * install those requirements
 * RUN batfiles/check the bat files(commands)
 
+TO EXECUTE
+<Virtual Environment>(pipenv shell)
+* <reds> python manage.py 8001 runserver
+  
+* <testingAPI> python manage.py runserver
+  
+* <testingAPI> python manage.py localhost:50051 grpcrunserver
+  
+* <ordersAPI> python manage.py localhost:50052 grpcrunserver
+  
+* <cart> python manage.py localhost:50053 grpcrunserver
+  
+* <reds_vue> npm run serve
+  
