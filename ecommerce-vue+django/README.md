@@ -21,13 +21,13 @@ TO EXECUTE
 <Virtual Environment>(pipenv shell)
 * <reds> python manage.py 8001 runserver
   
-* <testingAPI> python manage.py runserver
+* <b>testingAPI</b> python manage.py runserver
   
-* <testingAPI> python manage.py localhost:50051 grpcrunserver
+* <b>testingAPI</b> python manage.py localhost:50051 grpcrunserver
   
-* <ordersAPI> python manage.py localhost:50052 grpcrunserver
+* <b>ordersAPI</b> python manage.py localhost:50052 grpcrunserver
   
-* <cart> python manage.py localhost:50053 grpcrunserver
+* <b>cart</b> python manage.py localhost:50053 grpcrunserver
   
-* <reds_vue> npm run serve
+* <b>reds_vue</b> npm run serve
   
