@@ -12,13 +12,16 @@ import grpc
 from .serializers import cartserializer,ProductSerializer,mycartserializer
 from .models import Product, cart
 from protos import cart_pb2,cart_pb2_grpc
+import os
 # Create your views here.
 
 @api_view(['POST'])
 def createcart(request):
     data = request.data
     cartdata=cartserializer(data=data)
-    with grpc.insecure_channel("localhost:50053") as channel:
+    cart_host = os.getenv("CART_HOST", "localhost")
+    with grpc.insecure_channel(f"{cart_host}:50053") as channel:
+    # with grpc.insecure_channel("localhost:50053") as channel:
         stub=cart_pb2_grpc.cartopsStub(channel)
         if(cartdata.is_valid(raise_exception=True)):
             response=stub.createcart(cart_pb2.createRequest(req=cartdata.data))
@@ -49,7 +52,9 @@ def updatecart(request):
     req=cartserializer(data=data)
     req.is_valid(raise_exception=True)
     print(req.data)
-    with grpc.insecure_channel("localhost:50053") as channel:
+    cart_host = os.getenv("CART_HOST", "localhost")
+    with grpc.insecure_channel(f"{cart_host}:50053") as channel:
+    # with grpc.insecure_channel("localhost:50053") as channel:
         stub=cart_pb2_grpc.cartopsStub(channel)
         response = stub.updatecart(cart_pb2.createRequest(req=req.data))
         print(response)
@@ -104,7 +109,9 @@ class cart_(APIView):
 
         # cartobj = cart.objects.filter()
         #print(orders)
-        with grpc.insecure_channel("localhost:50053") as channel:
+        # with grpc.insecure_channel("localhost:50053") as channel:
+        cart_host = os.getenv("CART_HOST", "localhost")
+        with grpc.insecure_channel(f"{cart_host}:50053") as channel:
             stub = cart_pb2_grpc.cartopsStub(channel)
             print(request.user.get_username())
             username=request.user.get_username()

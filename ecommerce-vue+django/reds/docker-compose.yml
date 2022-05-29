@@ -1,0 +1,24 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=appDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - .:/code
+    ports:
+      - "8001:8001"
+    environment:
+      - POSTGRES_NAME=appDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+    depends_on:
+      - db

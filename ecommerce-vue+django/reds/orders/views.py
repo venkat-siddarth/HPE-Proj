@@ -12,14 +12,16 @@ import grpc
 from protos import orders_pb2,orders_pb2_grpc;
 from .models import Order, OrderItem
 from .serializers import OrderSerializer, MyOrderSerializer
-
+import os
 @api_view(['POST'])
 @authentication_classes([authentication.TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def checkout(request):
     request.data["username"]=request.user.get_username();
     print(request.data)
-    with grpc.insecure_channel("localhost:50052") as channel:
+    # with grpc.insecure_channel("localhost:50052") as channel:
+    orders_host = os.getenv("ORDERS_HOST", "localhost")
+    with grpc.insecure_channel(f"{orders_host}:50052") as channel:
         stub = orders_pb2_grpc.ordersfuncsStub(channel)
         data=OrderSerializer(request.data)
         print(data.data)
@@ -53,7 +55,9 @@ class OrdersList(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, format=None):
         #print("sdfsdf",request.user.get_username())
-        with grpc.insecure_channel("localhost:50052") as channel:
+        # with grpc.insecure_channel("localhost:50052") as channel:
+        orders_host = os.getenv("ORDERS_HOST", "localhost")
+        with grpc.insecure_channel(f"{orders_host}:50052") as channel:
             stub = orders_pb2_grpc.ordersfuncsStub(channel)
             try:
                 

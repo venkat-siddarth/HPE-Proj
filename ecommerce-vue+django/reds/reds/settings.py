@@ -85,16 +85,27 @@ WSGI_APPLICATION = 'reds.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'appDB',
-        'USER':'postgres',
-        'PASSWORD':'Siddu2002',
-        'HOST':'localhost'
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRES_HOST'),
+        'PORT': 5432,
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'userdb',
+#         'USER': "postgres",
+#         'PASSWORD': "Siddu2002",
+#         'HOST': "database.cbvmrzguw8tn.us-east-1.rds.amazonaws.com",
+#         'PORT': 5432,
+#     }
+# }
 
 
 # Password validation

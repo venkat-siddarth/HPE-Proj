@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=productDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+  web:
+    build: .
+    command: python manage.py grpcrunserver 0.0.0.0:50051 --dev
+    volumes:
+      - .:/code
+    ports:
+      - "50051:50051"
+    environment:
+      - POSTGRES_NAME=productDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+    depends_on:
+      - db

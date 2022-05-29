@@ -1,0 +1,176 @@
+version: "3"
+services:
+  # Django APP
+  userdb:
+    image: postgres
+    volumes:
+      - ./reds/data/user_db:/var/lib/postgresql/data
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_DB=appDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+  backend-app:
+    image: venkatsiddarth/backend_app
+    # build:
+    #   context: ./reds
+    #   dockerfile: ./Dockerfile
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - .:/code
+    networks:
+      microservices:
+    ports:
+      - "127.0.0.1:8001:8001"
+      # - "50051:50051"
+      # - "50052:50052"
+      # - "50053:50053"
+    environment:
+      - POSTGRES_NAME=appDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+      - POSTGRES_HOST=userdb
+      - PRODUCTS_REST_HOST=products-rest
+      - PRODUCTS_GRPC_HOST=products-grpc
+      - ORDERS_HOST=orders
+      - CART_HOST=cart
+    depends_on:
+      - userdb
+  # PRODUCTS APP
+  db:
+    image: postgres
+    volumes:
+      - ./testingAPI_rest/testAPI/data/db:/var/lib/postgresql/data
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_DB=productDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+  products-rest:
+    image: venkatsiddarth/reds_proj
+    # build:
+    #   context: ./testingAPI_rest/testAPI
+    #   dockerfile: ./Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+      - media:/media
+    ports:
+      - "127.0.0.1:8000:8000"
+    # image: products_rest
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_NAME=productDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=Siddu2002
+    depends_on:
+      - db
+  products-grpc:
+    image: venkatsiddarth/products_grpc
+    # build:
+    #   context: ./testingAPI_grpc/testAPI
+    #   dockerfile: ./Dockerfile
+    command: python manage.py grpcrunserver 0.0.0.0:50051 --dev
+    volumes:
+      - .:/code_1
+      - media:/media
+    ports:
+      - "50051:50051"
+    # image: products_grpc
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_NAME=productDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=Siddu2002
+    depends_on:
+      - db
+  # ORDERS APP
+  ordersdb:
+    image: postgres
+    volumes:
+      - ./ordersAPI/api2/data/db:/var/lib/postgresql/data
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_DB=ordersDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+  orders:
+    image: venkatsiddarth/orders
+    # build:
+    #   context: ./ordersAPI/api2
+    #   dockerfile: ./Dockerfile
+    command: python manage.py grpcrunserver 0.0.0.0:50052 --dev
+    volumes:
+      - .:/code
+    ports:
+      - "50052:50052"
+    # image: orders
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_NAME=ordersDB
+      - POSTGRES_HOST=ordersdb
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+    depends_on:
+      - ordersdb
+  # CART APP
+  cartdb:
+    image: postgres
+    volumes:
+      - ./cart/data/db:/var/lib/postgresql/data
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_DB=cartDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_PASSWORD=Siddu2002
+  cart:
+    image: venkatsiddarth/cart
+    # build:
+    #   context: ./cart
+    #   dockerfile: ./Dockerfile
+    command: python manage.py grpcrunserver 0.0.0.0:50053 --dev
+    volumes:
+      - .:/code
+    ports:
+      - "50053:50053"
+    # image: cart
+    networks:
+      - microservices
+    environment:
+      - POSTGRES_NAME=cartDB
+      - POSTGRES_USER=Siddu
+      - POSTGRES_HOST=cartdb
+      - POSTGRES_PASSWORD=Siddu2002
+    depends_on:
+      - cartdb
+  # Vuejs app
+  vue-app:
+    image: venkatsiddarth/vue-app
+    # build:
+    #   context: ./reds_vue
+    #   dockerfile: ./Dockerfile
+    command: npm run serve
+    ports:
+      - "8081:8080"
+    # image: vue-app
+    networks:
+      - microservices
+    environment:
+      - VUE_APP_SERVER_HOST=backend-app
+    volumes:
+      - .:/code
+
+networks:
+  microservices:
+
+volumes:
+  media:
