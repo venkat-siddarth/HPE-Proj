@@ -19,7 +19,7 @@ TO RUN:
 
 TO EXECUTE
 <Virtual Environment>(pipenv shell)
-* <reds> python manage.py 8001 runserver
+* <b>reds</b> python manage.py 8001 runserver
   
 * <b>testingAPI</b> python manage.py runserver
   
